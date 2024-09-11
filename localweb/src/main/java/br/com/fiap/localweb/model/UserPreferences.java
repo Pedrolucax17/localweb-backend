@@ -1,9 +1,15 @@
 package br.com.fiap.localweb.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "tbl_user_preferences")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
 public class UserPreferences {
 
     @Id
