@@ -22,7 +22,7 @@ public class UserAccountController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UserAccount saveUserAccount(@RequestBody @Valid UserAccount userAccount){
+    public UserAccountExhibitDto saveUserAccount(@RequestBody @Valid UserAccountRegisterDto userAccount){
         return userAccountService.saveUserAccount(userAccount);
     }
 
