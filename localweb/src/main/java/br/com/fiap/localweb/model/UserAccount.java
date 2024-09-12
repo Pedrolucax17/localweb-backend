@@ -1,6 +1,8 @@
 package br.com.fiap.localweb.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity
@@ -16,12 +18,15 @@ public class UserAccount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
+    @NotNull(message = "O nome é obrigatório")
     private String name;
 
     @Column(unique = true)
+    @NotNull(message = "O email é obrigatório")
+    @Email(message = "O formato do email está inválido")
     private String email;
 
+    @NotNull(message = "A senha é obrigatória")
     private String password;
 
     //@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
