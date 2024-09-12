@@ -1,11 +1,13 @@
 package br.com.fiap.localweb.service;
 
 import br.com.fiap.localweb.dto.UserAccountExhibitDto;
+import br.com.fiap.localweb.dto.UserAccountRegisterDto;
 import br.com.fiap.localweb.model.UserAccount;
 import br.com.fiap.localweb.repository.UserAccountRepository;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +17,11 @@ public class UserAccountService {
     @Autowired
     private UserAccountRepository accountRepository;
 
-    public UserAccountExhibitDto saveUserAccount(UserAccount userAccount){
-        return new UserAccountExhibitDto(accountRepository.save(userAccount));
+    public UserAccountExhibitDto saveUserAccount(UserAccountRegisterDto userAccount){
+        UserAccount user = new UserAccount();
+        BeanUtils.copyProperties(userAccount, user);
+        UserAccount userAccountSave = accountRepository.save(user);
+        return new UserAccountExhibitDto(userAccountSave);
     }
 
     public List<UserAccount> listAllUserAccount(){

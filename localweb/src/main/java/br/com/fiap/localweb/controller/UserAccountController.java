@@ -1,6 +1,7 @@
 package br.com.fiap.localweb.controller;
 
 import br.com.fiap.localweb.dto.UserAccountExhibitDto;
+import br.com.fiap.localweb.dto.UserAccountRegisterDto;
 import br.com.fiap.localweb.model.UserAccount;
 import br.com.fiap.localweb.repository.UserAccountRepository;
 import br.com.fiap.localweb.service.UserAccountService;
@@ -18,7 +19,7 @@ public class UserAccountController {
     private UserAccountService userAccountService;
 
     @PostMapping
-    public UserAccountExhibitDto saveUserAccount(@RequestBody UserAccount userAccount){
+    public UserAccountExhibitDto saveUserAccount(@RequestBody UserAccountRegisterDto userAccount){
         return userAccountService.saveUserAccount(userAccount);
     }
 
