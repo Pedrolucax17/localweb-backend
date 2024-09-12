@@ -22,12 +22,21 @@ public class UserAccountService {
         return accountRepository.findAll();
     }
 
+    public UserAccount findUserAccountById(Long id){
+        Optional<UserAccount> userAccountOptional = accountRepository.findById(id);
+        if(userAccountOptional.isPresent()){
+            return userAccountOptional.get();
+        }else{
+            throw new RuntimeException("Usuário não encontrado");
+        }
+    }
+
     public UserAccount updateUserAccount(UserAccount userAccount){
         Optional<UserAccount> accountOptional = accountRepository.findById(userAccount.getId());
         if(accountOptional.isPresent()){
             return accountRepository.save(userAccount);
         }else{
-            throw new RuntimeException("Contato não encontrado");
+            throw new RuntimeException("Usuário não encontrado");
         }
     }
 
@@ -36,7 +45,7 @@ public class UserAccountService {
         if (accountOptional.isPresent()){
             accountRepository.deleteById(id);
         }else{
-            throw new RuntimeException("Contato não encontrado!");
+            throw new RuntimeException("Usuário não encontrado!");
         }
 
     }

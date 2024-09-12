@@ -23,7 +23,8 @@ public class UserAccount {
 
     private String password;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private UserPreferences preferences;
+    //@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @Transient
+//    private UserPreferences preferences;
 
 }
