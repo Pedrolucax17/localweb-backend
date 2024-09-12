@@ -18,11 +18,12 @@ public class UserAccountService {
     @Autowired
     private UserAccountRepository accountRepository;
 
-    public UserAccountExhibitDto saveUserAccount(UserAccountRegisterDto userAccount){
-        UserAccount user = new UserAccount();
-        BeanUtils.copyProperties(userAccount, user);
-        UserAccount userAccountSave = accountRepository.save(user);
-        return new UserAccountExhibitDto(userAccountSave);
+    public UserAccount saveUserAccount(UserAccount userAccount){
+        return accountRepository.save(userAccount);
+//        UserAccount user = new UserAccount();
+//        BeanUtils.copyProperties(userAccount, user);
+//        UserAccount userAccountSave = accountRepository.save(user);
+//        return new UserAccountExhibitDto(userAccountSave);
     }
 
     public List<UserAccount> listAllUserAccount(){

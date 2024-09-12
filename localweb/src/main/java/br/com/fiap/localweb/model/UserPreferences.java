@@ -1,5 +1,6 @@
 package br.com.fiap.localweb.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,6 +19,7 @@ public class UserPreferences {
 
     @OneToOne
     @JoinColumn(name = "user_account_id", referencedColumnName = "id")
+    @JsonBackReference
     private UserAccount user;
 
     @Enumerated(EnumType.STRING)
