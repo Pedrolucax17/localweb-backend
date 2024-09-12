@@ -1,5 +1,6 @@
 package br.com.fiap.localweb.controller;
 
+import br.com.fiap.localweb.dto.UserAccountExhibitDto;
 import br.com.fiap.localweb.model.UserAccount;
 import br.com.fiap.localweb.repository.UserAccountRepository;
 import br.com.fiap.localweb.service.UserAccountService;
@@ -17,18 +18,23 @@ public class UserAccountController {
     private UserAccountService userAccountService;
 
     @PostMapping
-    public UserAccount saveUserAccount(@RequestBody UserAccount userAccount){
+    public UserAccountExhibitDto saveUserAccount(@RequestBody UserAccount userAccount){
         return userAccountService.saveUserAccount(userAccount);
     }
 
     @GetMapping("/id/{id}")
-    public UserAccount findUserAccountById(@PathVariable Long id){
+    public UserAccountExhibitDto findUserAccountById(@PathVariable Long id){
         return userAccountService.findUserAccountById(id);
     }
 
     @GetMapping
     public List<UserAccount> listAllUserAccount(){
         return userAccountService.listAllUserAccount();
+    }
+
+    @PostMapping
+    public UserAccountExhibitDto updateUserAccount(UserAccount userAccount){
+        return userAccountService.updateUserAccount(userAccount);
     }
 
     @DeleteMapping("/id/{id}")

@@ -1,5 +1,6 @@
 package br.com.fiap.localweb.service;
 
+import br.com.fiap.localweb.dto.UserAccountExhibitDto;
 import br.com.fiap.localweb.model.UserAccount;
 import br.com.fiap.localweb.repository.UserAccountRepository;
 import java.util.List;
@@ -14,27 +15,27 @@ public class UserAccountService {
     @Autowired
     private UserAccountRepository accountRepository;
 
-    public UserAccount saveUserAccount(UserAccount userAccount){
-        return accountRepository.save(userAccount);
+    public UserAccountExhibitDto saveUserAccount(UserAccount userAccount){
+        return new UserAccountExhibitDto(accountRepository.save(userAccount));
     }
 
     public List<UserAccount> listAllUserAccount(){
         return accountRepository.findAll();
     }
 
-    public UserAccount findUserAccountById(Long id){
+    public UserAccountExhibitDto findUserAccountById(Long id){
         Optional<UserAccount> userAccountOptional = accountRepository.findById(id);
         if(userAccountOptional.isPresent()){
-            return userAccountOptional.get();
+            return new UserAccountExhibitDto(userAccountOptional.get());
         }else{
             throw new RuntimeException("Usuário não encontrado");
         }
     }
 
-    public UserAccount updateUserAccount(UserAccount userAccount){
+    public UserAccountExhibitDto updateUserAccount(UserAccount userAccount){
         Optional<UserAccount> accountOptional = accountRepository.findById(userAccount.getId());
         if(accountOptional.isPresent()){
-            return accountRepository.save(userAccount);
+            return new UserAccountExhibitDto(accountRepository.save(userAccount));
         }else{
             throw new RuntimeException("Usuário não encontrado");
         }
