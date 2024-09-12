@@ -2,6 +2,7 @@ package br.com.fiap.localweb.service;
 
 import br.com.fiap.localweb.dto.UserAccountExhibitDto;
 import br.com.fiap.localweb.dto.UserAccountRegisterDto;
+import br.com.fiap.localweb.exceptions.UserNotFoundException;
 import br.com.fiap.localweb.model.UserAccount;
 import br.com.fiap.localweb.repository.UserAccountRepository;
 import java.util.List;
@@ -33,7 +34,7 @@ public class UserAccountService {
         if(userAccountOptional.isPresent()){
             return new UserAccountExhibitDto(userAccountOptional.get());
         }else{
-            throw new RuntimeException("Usuário não encontrado");
+            throw new UserNotFoundException("Usuário não encontrado");
         }
     }
 
@@ -42,7 +43,7 @@ public class UserAccountService {
         if(accountOptional.isPresent()){
             return new UserAccountExhibitDto(accountRepository.save(userAccount));
         }else{
-            throw new RuntimeException("Usuário não encontrado");
+            throw new UserNotFoundException("Usuário não encontrado");
         }
     }
 
@@ -51,7 +52,7 @@ public class UserAccountService {
         if (accountOptional.isPresent()){
             accountRepository.deleteById(id);
         }else{
-            throw new RuntimeException("Usuário não encontrado!");
+            throw new UserNotFoundException("Usuário não encontrado!");
         }
 
     }
