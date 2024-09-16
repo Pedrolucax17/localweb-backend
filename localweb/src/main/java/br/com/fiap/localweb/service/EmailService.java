@@ -6,6 +6,7 @@ import br.com.fiap.localweb.repository.EmailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.List;
@@ -49,9 +50,40 @@ public class EmailService {
             Email email = emailOptional.get();
             repository.deleteById(email.getId());
         }else{
-            throw new RuntimeException("Email não encontrado");
+            throw new RuntimeException("Email não encontrado!");
         }
 
     }
+
+    public void markAsRead(Long id){
+        Optional<Email> emailOptional = repository.findById(id);
+        if(emailOptional.isPresent()){
+            Email email = emailOptional.get();
+            email.setIsRead(true);
+        }else{
+            throw new RuntimeException("Email não encontrado!");
+        }
+    }
+
+    public List<Email> listUnreadEmails(String recipient){
+        return repository.listUnreadEmails(recipient);
+    }
+
+    public List<Email> searchEmailBySubject(String subject){
+        return repository.searchEmailBySubject(subject);
+    }
+
+    public List<Email> listSentEmails(String sender){
+        return repository.listSentEmails(sender);
+    }
+
+    //Fazer o dto de Exibição de Email
+    public List<Email> listEmailForPeriod(LocalDate initialDate, LocalDate finalDate){
+        return repository.listEmailForPeriod(initialDate, finalDate);
+    }
+
+
+    //Integrar com o calendário
+    public void calendar(){}
 
 }
