@@ -1,9 +1,13 @@
 package br.com.fiap.localweb.service;
 
+import br.com.fiap.localweb.dto.EmailExhibitDto;
+import br.com.fiap.localweb.dto.EmailRegisterDto;
 import br.com.fiap.localweb.model.Email;
 import br.com.fiap.localweb.model.UserAccount;
 import br.com.fiap.localweb.repository.EmailRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -20,25 +24,27 @@ public class EmailService {
 
     //Fazer o DTO de Envio de Email
     //Retorno deve ser o ResponseEntity
-    public Email sendEmail(Email email){
+    public EmailExhibitDto sendEmail(EmailRegisterDto emailRegiterDto){
+        Email email = new Email();
         email.setDateTime(LocalDateTime.now());
+        BeanUtils.copyProperties(emailRegiterDto, email);
 
-        return repository.save(email);
+        return new EmailExhibitDto(repository.save(email));
     }
 
     //Fazer o DTO de Leitura de Email
-    public Email findEmail(Long id){
+    public EmailExhibitDto findEmail(Long id){
         Optional<Email> emailOptional = repository.findById(id);
         if(emailOptional.isPresent()){
-            return emailOptional.get();
+            return new EmailExhibitDto(emailOptional.get());
         }else{
             //Modificar o tipo da exceção
             throw new RuntimeException("Email não encontrado");
         }
     }
 
-    public List<Email> listAllEmails(){
-        return repository.findAll();
+    public List<EmailExhibitDto> listAllEmails(){
+        return repository.findAll().stream().map(EmailExhibitDto::new).toList();
     }
 
     public void deleteEmail(Long id){
@@ -63,20 +69,20 @@ public class EmailService {
         }
     }
 
-    public List<Email> listUnreadEmails(String recipient){
+    public List<EmailExhibitDto> listUnreadEmails(String recipient){
         return repository.listUnreadEmails(recipient);
     }
 
-    public List<Email> searchEmailBySubject(String subject){
+    public List<EmailExhibitDto> searchEmailBySubject(String subject){
         return repository.searchEmailBySubject(subject);
     }
 
-    public List<Email> listSentEmails(String sender){
+    public List<EmailExhibitDto> listSentEmails(String sender){
         return repository.listSentEmails(sender);
     }
 
     //Fazer o dto de Exibição de Email
-    public List<Email> listEmailForPeriod(LocalDate initialDate, LocalDate finalDate){
+    public List<EmailExhibitDto> listEmailForPeriod(LocalDate initialDate, LocalDate finalDate){
         return repository.listEmailForPeriod(initialDate, finalDate);
     }
 
