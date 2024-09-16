@@ -29,6 +29,6 @@ public class Email {
     @Column(name = "date_time")
     private LocalDateTime dateTime;
 
-    @Column(name = "read")
+    @Column(name = "is_read")
     private Boolean isRead;
 }
