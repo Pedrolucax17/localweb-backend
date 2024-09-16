@@ -20,13 +20,13 @@ public class EmailController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public Email sendEmail(Email email, UserAccount userAccount){
-        return emailService.sendEmail(email, userAccount);
+    public Email sendEmail(@RequestBody Email email){
+        return emailService.sendEmail(email);
     }
 
     @GetMapping("/id/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Email findEmail(Long id){
+    public Email findEmail(@PathVariable Long id){
         return emailService.findEmail(id);
     }
 
@@ -38,31 +38,31 @@ public class EmailController {
 
     @DeleteMapping("id/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteEmail(Long id){
+    public void deleteEmail(@PathVariable Long id){
         emailService.deleteEmail(id);
     }
 
     @PutMapping("/id/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void markAsRead(Long id){
+    public void markAsRead(@PathVariable Long id){
         emailService.markAsRead(id);
     }
 
     @GetMapping("/recipient/{recipient}")
     @ResponseStatus(HttpStatus.OK)
-    public List<Email> listUnreadEmails(String recipient){
+    public List<Email> listUnreadEmails(@PathVariable String recipient){
         return emailService.listUnreadEmails(recipient);
     }
 
     @GetMapping("/subject/{subject}")
     @ResponseStatus(HttpStatus.OK)
-    public List<Email> searchEmailBySubject(String subject){
+    public List<Email> searchEmailBySubject(@PathVariable String subject){
         return emailService.searchEmailBySubject(subject);
     }
 
     @GetMapping("/sender/{sender}")
     @ResponseStatus(HttpStatus.OK)
-    public List<Email> listSentEmails(String sender){
+    public List<Email> listSentEmails(@PathVariable String sender){
         return emailService.listSentEmails(sender);
     }
 

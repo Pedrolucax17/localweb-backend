@@ -20,10 +20,7 @@ public class EmailService {
 
     //Fazer o DTO de Envio de Email
     //Retorno deve ser o ResponseEntity
-    public Email sendEmail(Email email, UserAccount userAccount){
-        String emailUser = userAccount.getEmail();
-
-        email.setSender(emailUser);
+    public Email sendEmail(Email email){
         email.setDateTime(LocalDateTime.now());
 
         return repository.save(email);
@@ -60,6 +57,7 @@ public class EmailService {
         if(emailOptional.isPresent()){
             Email email = emailOptional.get();
             email.setIsRead(true);
+            repository.save(email);
         }else{
             throw new RuntimeException("Email não encontrado!");
         }

@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class Email {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String recipient;
