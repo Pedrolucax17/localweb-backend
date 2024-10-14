@@ -2,6 +2,7 @@ package br.com.fiap.localweb.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public record EmailRegisterDto(
         @NotBlank(message = "O destinatário é obrigatório")
@@ -14,7 +15,7 @@ public record EmailRegisterDto(
         String subject,
         @NotBlank(message = "O conteúdo é obrigatório")
         String content,
-        @NotBlank(message = "O campo isRead é obrigatório")
+        @NotNull(message = "O campo isRead é obrigatório")
         Boolean isRead
 ) {
 }
