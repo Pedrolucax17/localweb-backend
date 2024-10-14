@@ -22,8 +22,6 @@ public class EmailService {
     private EmailRepository repository;
 
 
-    //Fazer o DTO de Envio de Email
-    //Retorno deve ser o ResponseEntity
     public EmailExhibitDto sendEmail(EmailRegisterDto emailRegiterDto){
         Email email = new Email();
         email.setDateTime(LocalDateTime.now());
@@ -32,7 +30,6 @@ public class EmailService {
         return new EmailExhibitDto(repository.save(email));
     }
 
-    //Fazer o DTO de Leitura de Email
     public EmailExhibitDto findEmail(Long id){
         Optional<Email> emailOptional = repository.findById(id);
         if(emailOptional.isPresent()){
@@ -81,7 +78,7 @@ public class EmailService {
         return repository.listSentEmails(sender);
     }
 
-    //Fazer o dto de Exibição de Email
+
     public List<EmailExhibitDto> listEmailForPeriod(LocalDate initialDate, LocalDate finalDate){
         return repository.listEmailForPeriod(initialDate, finalDate);
     }
