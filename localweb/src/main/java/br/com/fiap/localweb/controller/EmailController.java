@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -72,8 +73,8 @@ public class EmailController {
     @GetMapping(value = "/date", params = {"initialDate", "finalDate"})
     @ResponseStatus(HttpStatus.OK)
     public List<EmailExhibitDto> listEmailForPeriod(
-            @RequestParam LocalDate initialDate,
-            @RequestParam LocalDate finalDate){
+            @RequestParam LocalDateTime initialDate,
+            @RequestParam LocalDateTime finalDate){
         return emailService.listEmailForPeriod(initialDate, finalDate);
     }
 

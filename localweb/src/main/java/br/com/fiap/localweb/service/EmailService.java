@@ -67,20 +67,33 @@ public class EmailService {
     }
 
     public List<EmailExhibitDto> listUnreadEmails(String recipient){
-        return repository.listUnreadEmails(recipient);
+        return repository
+                .listUnreadEmails(recipient)
+                .stream()
+                .map(EmailExhibitDto::new)
+                .toList();
     }
 
     public List<EmailExhibitDto> searchEmailBySubject(String subject){
-        return repository.searchEmailBySubject(subject);
+        return repository
+                .searchEmailBySubject(subject)
+                .stream()
+                .map(EmailExhibitDto::new)
+                .toList();
+
     }
 
     public List<EmailExhibitDto> listSentEmails(String sender){
-        return repository.listSentEmails(sender);
+        return repository.listSentEmails(sender).stream().map(EmailExhibitDto::new).toList();
     }
 
 
-    public List<EmailExhibitDto> listEmailForPeriod(LocalDate initialDate, LocalDate finalDate){
-        return repository.listEmailForPeriod(initialDate, finalDate);
+    public List<EmailExhibitDto> listEmailForPeriod(LocalDateTime initialDate, LocalDateTime finalDate){
+        return repository
+                .listEmailForPeriod(initialDate, finalDate)
+                .stream()
+                .map(EmailExhibitDto::new)
+                .toList();
     }
 
 
